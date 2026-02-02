@@ -6,7 +6,7 @@ metadata: {"openclaw":{"emoji":"🔊","os":["linux"],"requires":{"bins":["ffmpeg
 
 # Telegram 群组语音消息发送 (telegram-voice-group) 🔊
 
-使用 Telegram 群组话题功能实现隔离上下文向替代 Discord，并可以指定 Telegram 群组发送语音消息。
+使用 Telegram 群组话题功能实现隔离上下文替代 Discord，并可以指定 Telegram 群组发送语音消息。
 
 ## 功能
 
