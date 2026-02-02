@@ -1,26 +1,18 @@
 # Telegram Voice Group Skill for OpenClaw
 
-向指定 Telegram 群组发送语音消息的 OpenClaw 技能。
+向指定 Telegram 群组和话题发送语音气泡消息的 OpenClaw 技能，支持上下文隔离和多模型配置。
 
-## 功能
+## 概述
 
-- 使用 Microsoft Edge-TTS 生成高质量中文语音
-- 转换为 Telegram 语音气泡兼容格式
-- 发送到指定的群组会话
-- **话题独立上下文**：每个 Telegram 话题都有独立的会话上下文，格式为 `agent:main:telegram:group:{groupId}:topic:{threadId}`
-- **会话隔离**：不同话题间的对话历史和上下文完全隔离，互不干扰，这使得 Telegram 群组话题功能可以有效替代 Discord 频道的组织功能
-- 支持向特定话题发送语音消息
+这个技能允许 OpenClaw 助理向 Telegram 群组和话题发送语音消息，实现类似 Discord 服务器的多频道功能。通过 Telegram 话题功能，您可以创建多个独立的讨论区域，每个区域都有独立的上下文和可配置的 AI 模型。
 
-## 安装
+## 主要功能
 
-```bash
-openclaw skills install telegram-voice-group
-```
-
-## 依赖
-
-- `edge-tts` - 用于生成语音
-- `ffmpeg` - 用于格式转换
+- **语音气泡发送**：向 Telegram 群组和话题发送真正的语音气泡消息（非音频文件）
+- **话题上下文隔离**：每个话题都有独立的会话上下文，互不干扰
+- **多模型配置**：可在不同话题中设置不同的 AI 模型
+- **Discord 替代方案**：利用 Telegram 话题功能实现类似 Discord 频道的组织结构
+- **自动文本清洗**：自动移除 Markdown 标记、URL 和特殊符号，确保朗读效果
 
 ## 部署到 Telegram 群组完整教程
 
@@ -69,6 +61,30 @@ openclaw skills install telegram-voice-group
   向 agent:main:telegram:group:[GROUP_ID]:topic:[TOPIC_ID] 发送语音: 你的语音内容
   ```
 
+## 话题功能详解
+
+### 完全替代 Discord 的能力
+- **话题独立上下文**：每个 Telegram 话题都有独立的会话上下文，格式为 `agent:main:telegram:group:{groupId}:topic:{threadId}`
+- **会话隔离**：不同话题间的对话历史和上下文完全隔离，互不干扰
+- **模型独立设置**：可以在不同的话题中设置不同的 AI 模型
+- **上下文独立**：每个话题维护自己的对话历史，就像 Discord 的不同频道一样
+
+### 在不同话题中设置不同模型
+- 通过 OpenClaw 的会话管理功能，可以为每个话题（`agent:main:telegram:group:{groupId}:topic:{threadId}`）单独配置 AI 模型
+- 每个话题的上下文完全独立，不会相互影响
+- 支持多话题并行运行，每个话题可以有不同的功能和配置
+
+## 安装
+
+```bash
+openclaw skills install telegram-voice-group
+```
+
+## 依赖
+
+- `edge-tts` - 用于生成语音
+- `ffmpeg` - 用于格式转换
+
 ## 使用方法
 
 ### 1. 直接在会话中使用此功能：
@@ -98,19 +114,6 @@ await sendVoiceToTelegramGroup({
   rate: "+5%"
 });
 ```
-
-## 话题功能详解
-
-### 完全替代 Discord 的能力
-- **话题独立上下文**：每个 Telegram 话题都有独立的会话上下文，格式为 `agent:main:telegram:group:{groupId}:topic:{threadId}`
-- **会话隔离**：不同话题间的对话历史和上下文完全隔离，互不干扰
-- **模型独立设置**：可以在不同的话题中设置不同的 AI 模型
-- **上下文独立**：每个话题维护自己的对话历史，就像 Discord 的不同频道一样
-
-### 在不同话题中设置不同模型
-- 通过 OpenClaw 的会话管理功能，可以为每个话题（`agent:main:telegram:group:{groupId}:topic:{threadId}`）单独配置 AI 模型
-- 每个话题的上下文完全独立，不会相互影响
-- 支持多话题并行运行，每个话题可以有不同的功能和配置
 
 ## 技术规范
 
